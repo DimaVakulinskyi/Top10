@@ -21,11 +21,6 @@ class TableViewCell: UITableViewCell {
         movieImageView.image = nil
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func configure(with viewModel: MovieCellViewModel) {
         self.viewModel = viewModel
         viewModel.delegate = self
@@ -34,19 +29,10 @@ class TableViewCell: UITableViewCell {
         movieTitleLabel.text = viewModel.movieTitle
         ratingLabel.text = viewModel.ratingText
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
 }
 
 extension TableViewCell: MovieCellViewModelDelegate {
     func didLoad(image: UIImage?) {
         movieImageView.image = image
     }
-    
-    
 }

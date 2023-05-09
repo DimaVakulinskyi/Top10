@@ -24,7 +24,6 @@ class DetailsViewController: UIViewController {
     func displayCharacterCounts(_ characterCounts: [Character: Int]) {
         var resultText = ""
         
-        // Sort the dictionary by key to display the characters in a consistent order
         let sortedCharacterCounts = characterCounts.sorted { $0.key < $1.key }
         
         for (character, count) in sortedCharacterCounts {
