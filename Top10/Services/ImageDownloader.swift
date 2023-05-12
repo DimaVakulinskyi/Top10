@@ -25,12 +25,16 @@ actor ImageDownloader {
         } else {
             let task = Task.detached(priority: .low) {
                 do {
-                    let request = URLRequest(url: URL(string: identifier)!)
-                    let (data, _) = try await URLSession.shared.data(for: request)
-                    await self.saveCache(data: data, identifier: identifier)
-                    
-                } catch { print(error.localizedDescription) }
-                
+                    if let url = URL(string: identifier) {
+                        let request = URLRequest(url: url)
+                        let (data, _) = try await URLSession.shared.data(for: request)
+                        await self.saveCache(data: data, identifier: identifier)
+                    } else {
+                        print("Invalid URL")
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
                 return await self.cache[identifier]
             }
             tasks[identifier] = task
